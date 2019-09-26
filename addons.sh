@@ -31,16 +31,18 @@ if [[ ! -f "$CWD/addons.txt" ]] || [[ ! -s "$CWD/addons.txt" ]]; then
 	exit 1
 fi
 
-# Only check addons max every 4 hours - to prevent load on the esoui server.
-TDIFF=$(($(date +%s) - $(cat "$CWD/.time")))
-if [[ -f "$CWD/.time" ]] && [[ $TDIFF -le 14400 ]]; then
-	MDIFF=$(bc -l <<< $TDIFF/60 | cut -d. -f1)
-	if [[ $MDIFF != "" ]]; then
-		echo "Addons already checked $MDIFF minute(s) ago, skipping."
-	else
-		echo "Addons already checked $TDIFF second(s) ago, skipping."
+if [[ -f "$CWD/.time" ]]; then
+	# Only check addons max every 4 hours - to prevent load on the esoui server.
+	TDIFF=$(($(date +%s) - $(cat "$CWD/.time")))
+	if [[ $TDIFF -le 14400 ]]; then
+		MDIFF=$(bc -l <<< $TDIFF/60 | cut -d. -f1)
+		if [[ $MDIFF != "" ]]; then
+			echo "Addons already checked $MDIFF minute(s) ago, skipping."
+		else
+			echo "Addons already checked $TDIFF second(s) ago, skipping."
+		fi
+		exit 0
 	fi
-	exit 0
 fi
 
 TMPDIR="/tmp/esoaddons"
