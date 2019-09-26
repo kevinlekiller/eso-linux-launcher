@@ -39,7 +39,7 @@ fi
 if [[ $UPDATE_ADDONS == 1 ]] && [[ -f $CWD/addons.sh ]]; then
 	bash addons.sh "$ESO_ADDONS_PATH"
 fi
-exit
+
 bash -c "$ESO_COMMAND"
 
 # Wait for the ESO launcher to start.
