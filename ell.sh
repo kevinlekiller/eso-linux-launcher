@@ -33,11 +33,11 @@ ESO_LAUNCHER_COMMAND=${ESO_LAUNCHER_COMMAND:-"/bufferselfpatchfix /steam true"}
 
 CWD=$(dirname $(realpath $0))
 if [[ $UPDATE_TTC == 1 ]] && [[ -f $CWD/ttc.sh ]]; then
-	bash ttc.sh "$ESO_ADDONS_PATH/TamrielTradeCentre"
+	bash "$CWD/ttc.sh" "$ESO_ADDONS_PATH/TamrielTradeCentre"
 fi
 
 if [[ $UPDATE_ADDONS == 1 ]] && [[ -f $CWD/addons.sh ]]; then
-	bash addons.sh "$ESO_ADDONS_PATH"
+	bash "$CWD/addons.sh" "$ESO_ADDONS_PATH"
 fi
 
 bash -c "$ESO_COMMAND"
