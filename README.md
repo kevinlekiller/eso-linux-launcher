@@ -13,6 +13,8 @@ Make ell.sh executable `chmod u+x ell.sh`
 
 Run ell.sh `./ell.sh`
 
+You can use the `The Elder Scrolls Online.desktop` file, edit it with a text editor, change `Exec=/home/kevin/Documents/eso-linux-launcher/ell.sh` to where you have `ell.sh` and put `The Elder Scrolls Online.desktop` on your desktop, you can then double click it to launch ell.sh.
+
 ---
 
 ### Addons
