@@ -19,6 +19,8 @@ You can use the `The Elder Scrolls Online.desktop` file, edit it with a text edi
 
 ### Addons
 
+The script will only check for addon updates if you haven't checked in the past 4 hours - to reduce load on the esoui servers.
+
 #### Updating / adding Addons:
 
 If you want it to update your addons, put the links to the addons in addons.txt,
@@ -40,6 +42,8 @@ If you want to delete an addon, put the word `del` with a space in front of the 
 ---
 
 ### TTC
+
+The script will only update the TTC price table if you haven't updated it in 12 hours or more - to prevent downloading too often.
 
 If you want it to keep the TTC price table up to date run ell.sh like so:
 
