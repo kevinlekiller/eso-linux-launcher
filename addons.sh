@@ -62,7 +62,7 @@ while read line; do
 			for adir in $(echo "$ADIRS" | sed "s# #|#" | tr '|' '\n'); do
 				rm -rf "$1/$adir"
 			done
-			sed -i "s#$line##" addons.txt
+			sed -i "s#$line##" "$CWD/addons.txt"
 		else
 			echo "Problem parsing this addon: $line"
 		fi
@@ -112,10 +112,10 @@ while read line; do
 		fi
 	done
 	# del url name ver dirs
-	sed -i "s#$line#$AURI $ANAME $AVERS $ADIRS#" addons.txt
+	sed -i "s#$line#$AURI $ANAME $AVERS $ADIRS#" "$CWD/addons.txt"
 	echo "Updated addon $ANAME"
 	sleep 1
-done < addons.txt
+done < "$CWD/addons.txt"
 
-sed -i '/^$/d' addons.txt
-echo $(date +%s) > .time
+sed -i '/^$/d' "$CWD/addons.txt"
+echo $(date +%s) > "$CWD/.time"
