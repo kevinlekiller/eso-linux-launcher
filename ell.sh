@@ -51,7 +51,7 @@ done
 while [[ $(pgrep eso64.exe) == "" ]]; do
 	# The ESO launcher was closed before starting ESO, so stop waiting for ESO to start.
 	if [[ $(pgrep -f "/bufferselfpatchfix /steam true") == "" ]]; then
-		break
+		exit 0
 	fi
 	sleep 10
 done
