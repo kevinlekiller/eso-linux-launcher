@@ -19,6 +19,9 @@
     https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 LICENSE
 
+# Set to 1 if you want to force updating addons.
+FORCE_UPDATE=${FORCE_UPDATE:-0}
+
 if [[ ! -d $1 ]]; then
 	echo "Pass the directory of the ESO addons folder as an argument ; ex.: ~/.local/share/Steam/steamapps/compatdata/306130/pfx/drive_c/users/steamuser/My Documents/Elder Scrolls Online/live/AddOns"
 	exit 1
@@ -31,7 +34,7 @@ if [[ ! -f "$CWD/addons.txt" ]] || [[ ! -s "$CWD/addons.txt" ]]; then
 	exit 1
 fi
 
-if [[ -f "$CWD/.time" ]]; then
+if [[ $FORCE_UPDATE == 0 ]] && [[ -f "$CWD/.time" ]]; then
 	# Only check addons max every 4 hours - to prevent load on the esoui server.
 	TDIFF=$(($(date +%s) - $(cat "$CWD/.time")))
 	if [[ $TDIFF -le 14400 ]]; then
