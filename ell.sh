@@ -60,8 +60,8 @@ while [[ $(pgrep eso64.exe) == "" ]]; do
 	if [[ $(pgrep -f "/bufferselfpatchfix /steam true") == "" ]]; then
 		exit 0
 	fi
-	if [[ $LTIME -ge 240 ]]; then
-		echo "Waited 4 minutes for ESO to start, timing out."
+	if [[ $LTIME -ge 3600 ]]; then
+		echo "Waited 1 hour for ESO to start, timing out."
 		exit 1
 	fi
 	sleep 10
