@@ -50,7 +50,7 @@ while [[ $(pgrep -f "/bufferselfpatchfix /steam true") == "" ]]; do
 		exit 1
 	fi
 	sleep 1
-	$((LTIME++))
+	((LTIME++))
 done
 
 # Kill the launcher once the game is running - the launcher is reported to reduce game performance.
@@ -65,7 +65,7 @@ while [[ $(pgrep eso64.exe) == "" ]]; do
 		exit 1
 	fi
 	sleep 10
-	$((LTIME+10))
+	((LTIME+10))
 done
 pkill -f "/bufferselfpatchfix /steam true"
 
