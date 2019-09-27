@@ -43,17 +43,29 @@ fi
 bash -c "$ESO_COMMAND"
 
 # Wait for the ESO launcher to start.
+LTIME=0
 while [[ $(pgrep -f "/bufferselfpatchfix /steam true") == "" ]]; do
+	if [[ $LTIME -ge 240 ]]; then
+		echo "Waited 4 minutes for the ESO launcher, timing out."
+		exit 1
+	fi
 	sleep 1
+	$((LTIME++))
 done
 
 # Kill the launcher once the game is running - the launcher is reported to reduce game performance.
+LTIME=0
 while [[ $(pgrep eso64.exe) == "" ]]; do
 	# The ESO launcher was closed before starting ESO, so stop waiting for ESO to start.
 	if [[ $(pgrep -f "/bufferselfpatchfix /steam true") == "" ]]; then
 		exit 0
 	fi
+	if [[ $LTIME -ge 240 ]]; then
+		echo "Waited 4 minutes for ESO to start, timing out."
+		exit 1
+	fi
 	sleep 10
+	$((LTIME+10)
 done
 pkill -f "/bufferselfpatchfix /steam true"
 
