@@ -65,7 +65,7 @@ while [[ $(pgrep eso64.exe) == "" ]]; do
 		exit 1
 	fi
 	sleep 10
-	$((LTIME+10)
+	$((LTIME+10))
 done
 pkill -f "/bufferselfpatchfix /steam true"
 
