@@ -41,7 +41,7 @@ If you want to delete an addon, put the word `del` with a space in front of the 
 
 #### Force updating Addons:
 
-If you want to delete or add new addons and don't want to wait 4 hours, you can make the script check the addons.txt file aggain:
+If you want to delete or add new addons and don't want to wait 4 hours, you can make the script check the addons.txt file again:
 
 `FORCE_UPDATE=1 ./addons.sh ~/.local/share/Steam/steamapps/compatdata/306130/pfx/drive_c/users/steamuser/"My Documents/Elder Scrolls Online"/live/AddOns`
 
