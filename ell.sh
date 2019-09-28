@@ -29,6 +29,8 @@ ESO_ADDONS_PATH=${ESO_ADDONS_PATH:-~/.local/share/Steam/steamapps/compatdata/306
 ESO_COMMAND=${ESO_COMMAND:-"steam steam://rungameid/306130"}
 # Process name used by the ESO launcher - this is what it's called for steam, I don't know about the native launcher. Use pgrep/ps/htop/etc. to find it.
 ESO_LAUNCHER_COMMAND=${ESO_LAUNCHER_COMMAND:-"/bufferselfpatchfix /steam true"}
+# Check if Steam is running first - start it before starting ESO - set to 0 to disable
+VERIFY_STEAM_RUNNING=${VERIFY_STEAM_RUNNING:-1}
 
 
 CWD=$(dirname $(realpath $0))
@@ -38,6 +40,10 @@ fi
 
 if [[ $UPDATE_ADDONS == 1 ]] && [[ -f $CWD/addons.sh ]]; then
 	bash "$CWD/addons.sh" "$ESO_ADDONS_PATH"
+fi
+
+if [[ $VERIFY_STEAM_RUNNING == 1 ]] && [[ $(pgrep steamwebhelper) == "" ]]; then
+	nohup steam &
 fi
 
 bash -c "$ESO_COMMAND"
