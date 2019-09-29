@@ -43,7 +43,7 @@ if [[ $UPDATE_ADDONS == 1 ]] && [[ -f $CWD/addons.sh ]]; then
 fi
 
 if [[ $VERIFY_STEAM_RUNNING == 1 ]] && [[ $(pgrep steamwebhelper) == "" ]]; then
-	nohup steam &
+	nohup steam > /dev/null &
 fi
 
 bash -c "$ESO_COMMAND"
