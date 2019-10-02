@@ -31,7 +31,8 @@ ESO_COMMAND=${ESO_COMMAND:-"steam steam://rungameid/306130"}
 ESO_LAUNCHER_COMMAND=${ESO_LAUNCHER_COMMAND:-"/bufferselfpatchfix /steam true"}
 # Check if Steam is running first - start it before starting ESO - set to 0 to disable
 VERIFY_STEAM_RUNNING=${VERIFY_STEAM_RUNNING:-1}
-
+# Try to start steam if not running - this doesn't always work, it's better to copy /usr/share/applications/steam.desktop to ~/.config/autostart
+START_STEAM=${START_STEAM:-0}
 
 CWD=$(dirname $(realpath $0))
 if [[ $UPDATE_TTC == 1 ]] && [[ -f $CWD/ttc.sh ]]; then
@@ -43,7 +44,16 @@ if [[ $UPDATE_ADDONS == 1 ]] && [[ -f $CWD/addons.sh ]]; then
 fi
 
 if [[ $VERIFY_STEAM_RUNNING == 1 ]] && [[ $(pgrep steamwebhelper) == "" ]]; then
-	nohup steam > /dev/null & disown
+	if [[ $START_STEAM == 1 ]]; then
+		echo "Starting Steam."
+		nohup steam > /dev/null & disown
+	else
+		echo "Steam is not running, exiting. (Consider autostarting steam.)"
+		if [[ -f /usr/share/applications/steam.desktop ]]; then
+			echo "cp /usr/share/applications/steam.desktop ~/.config/autostart/"
+		fi
+		exit 1
+	fi
 fi
 
 bash -c "$ESO_COMMAND"
