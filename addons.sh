@@ -94,10 +94,6 @@ while read line; do
 		echo "Addon $ANAME is up to date."
 		continue
 	fi
-	
-	if [[ $AVERS == "" ]]; then
-		AVERS=$RVERS
-	fi
 
 	DURI=$(curl -s $(echo "$AURI" | sed "s#/info#/download#" | sed "s#.html##") | grep -m1 -Poi "https://cdn.esoui.com/downloads/file[^\"]*")
 	wget -q -O "$TMPDIR/addon.zip" "$DURI"
@@ -115,7 +111,7 @@ while read line; do
 		fi
 	done
 	# del url name ver dirs
-	sed -i "s#$line#$AURI $ANAME $AVERS $ADIRS#" "$CWD/addons.txt"
+	sed -i "s#$line#$AURI $ANAME $RVERS $ADIRS#" "$CWD/addons.txt"
 	echo "Updated addon $ANAME"
 	sleep 1
 done < "$CWD/addons.txt"
