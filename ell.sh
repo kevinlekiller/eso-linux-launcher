@@ -60,7 +60,7 @@ bash -c "$ESO_COMMAND"
 
 # Wait for the ESO launcher to start.
 LTIME=0
-while [[ $(pgrep -f "/bufferselfpatchfix /steam true") == "" ]]; do
+while [[ $(pgrep -f $ESO_LAUNCHER_COMMAND) == "" ]]; do
 	if [[ $LTIME -ge 240 ]]; then
 		echo "Waited 4 minutes for the ESO launcher, timing out."
 		exit 1
@@ -73,7 +73,7 @@ done
 LTIME=0
 while [[ $(pgrep eso64.exe) == "" ]]; do
 	# The ESO launcher was closed before starting ESO, so stop waiting for ESO to start.
-	if [[ $(pgrep -f "/bufferselfpatchfix /steam true") == "" ]]; then
+	if [[ $(pgrep -f $ESO_LAUNCHER_COMMAND) == "" ]]; then
 		exit 0
 	fi
 	if [[ $LTIME -ge 3600 ]]; then
@@ -83,7 +83,7 @@ while [[ $(pgrep eso64.exe) == "" ]]; do
 	sleep 10
 	((LTIME+10))
 done
-pkill -f "/bufferselfpatchfix /steam true"
+pkill -f $ESO_LAUNCHER_COMMAND
 
 # You can do stuff here - like use xrandr to change your resolution / refresh rate before ESO starts.
 
