@@ -83,7 +83,7 @@ while read line; do
 		AVERS=""
 	fi
 
-	RVERS=$(curl -s $AURI | grep -Poi "<div\s+id=\"version\">Version:\s+[^<]+" | cut -d\  -f3)
+	RVERS=$(curl -s $AURI 2> /dev/null | grep -Poi "<div\s+id=\"version\">Version:\s+[^<]+" | cut -d\  -f3)
 	if [[ $RVERS == "" ]];  then
 		echo "Error finding version of addon $ANAME on esoui.com"
 		sleep 1
@@ -95,7 +95,7 @@ while read line; do
 		continue
 	fi
 
-	DURI=$(curl -s $(echo "$AURI" | sed "s#/info#/download#" | sed "s#.html##") | grep -m1 -Poi "https://cdn.esoui.com/downloads/file[^\"]*")
+	DURI=$(curl -s 2> /dev/null $(echo "$AURI" | sed "s#/info#/download#" | sed "s#.html##") | grep -m1 -Poi "https://cdn.esoui.com/downloads/file[^\"]*")
 	wget -q -O "$TMPDIR/addon.zip" "$DURI"
 	unzip -o -qq -d "$TMPDIR" "$TMPDIR/addon.zip"
 	rm "$TMPDIR/addon.zip"
