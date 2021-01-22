@@ -83,7 +83,7 @@ while [[ $(pgrep eso64.exe) == "" ]]; do
 	sleep 10
 	((LTIME+10))
 done
-pkill -f $ESO_LAUNCHER_COMMAND
+pkill -f "$ESO_LAUNCHER_COMMAND"
 
 # You can do stuff here - like use xrandr to change your resolution / refresh rate before ESO starts.
 
