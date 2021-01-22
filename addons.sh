@@ -95,7 +95,7 @@ while read line; do
 		continue
 	fi
 
-	DURI=$(curl -s 2> /dev/null $(echo "$AURI" | sed "s#/info#/download#" | sed "s#.html##") | grep -m1 -Poi "https://cdn.esoui.com/downloads/file[^\"]*")
+	DURI=$(curl -s $(echo "$AURI" | sed "s#/info#/download#" | sed "s#.html##") 2> /dev/null | grep -m1 -Poi "https://cdn.esoui.com/downloads/file[^\"]*")
 	wget -q -O "$TMPDIR/addon.zip" "$DURI"
 	unzip -o -qq -d "$TMPDIR" "$TMPDIR/addon.zip"
 	rm "$TMPDIR/addon.zip"
